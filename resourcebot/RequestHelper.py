@@ -1,4 +1,4 @@
-""" helper to deal with all operations on the received request"""
+""" helper to deal with all operations on the received request/tweet"""
 
 import re
 
@@ -6,18 +6,19 @@ class ResourceRequest:
     
     def __init__(self,Tweet):
         self.id = Tweet.id
-        self.tweet = Tweet.text #Tweet object from tweepy
+        self.tweet = Tweet.text.lower() #Tweet object from tweepy in lowercase
         self.verified = True 
         self.required = False
     
     @property
     def help_message(self): #reply with default message if request is not structured properly
-        return  "your request wan't formed properly, try following some of the below guidelines"
+        return  "your request wasn't formed properly, try following some of the below guidelines"
     
     def check_params(self): #check for legitimate params
         try:
-            pattern = re.compile("@([a-zA-Z0-9]+) (\([a-zA-Z]+\))\(.+\)((\([a-zA-Z]+\))?)+")
-            print("pattern check", re.match(pattern,self.tweet).group())
+            tweet = re.sub(' ','',self.tweet)
+            pattern = re.compile("@([a-zA-Z0-9]+)(\([a-zA-Z]+\))\(.+\)((\([a-zA-Z]+\))?)+")
+            print("pattern matched:", re.match(pattern,tweet).group())
             return True
         
         except Exception as e:  
@@ -28,12 +29,14 @@ class ResourceRequest:
         if self.check_params():
             try:
                 res = re.findall(r'\(.*?\)', self.tweet)
+                res = [re.sub('[()]','',item).split(',') for item in res]
             except:
                 return "could not extract parameters even though the request was formed properly, please inform the devs"
             return res
         else:
             return self.help_message
 
+# @VEdankPAnde (pune)(oxygen,beds) -> [['pune'],['beds','bed']]
 
 
 

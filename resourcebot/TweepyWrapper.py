@@ -1,7 +1,10 @@
 """wrapper class for the tweepy module"""
 
+from re import M
 import tweepy
 from .RequestHelper import ResourceRequest
+from .autocorrect import tune
+from .generate_links import LinkGen
 
 #test wrapper for Tweepy API to make the code cleaner
 #all required tweepy functions should pass through this class
@@ -28,11 +31,20 @@ class Api:
         for mentions in tweepy.Cursor(self.api.mentions_timeline,since_id =1392801506370277384).items():
             test = ResourceRequest(mentions)
             try:
-                self.reply(test.extract_params(),mentions.id)
+                #self.reply(test.extract_params(),mentions.id)
+                generator = LinkGen()
+                print(generator.generate_link(tune(test.extract_params())))
+
             except Exception as e:
                 print(e)
-            print(test.extract_params())
+            # print(test.extract_params())
+
+    def get_mentions(self):
+        for mentions in tweepy.Cursor(self.api.mentions_timeline,since_id =1392801506370277384).items():
+            test = ResourceRequest(mentions)
+            pass
     
+    #TODO: loop through mentions cursor and validate+reply to tweets
     def reply_to_mention(self):
         pass
 

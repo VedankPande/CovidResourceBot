@@ -1,3 +1,20 @@
 tweepy
 levenshtein
 re
+
+
+
+###################################################3
+
+intro, tech stack , problem statement -- kaushik
+use case, market scope -- shantanu
+demo,drawbacks  -- vedank
+future plans -- akshaj
+
+
+TODO: 
+1. report
+2. research paper
+3. error handling
+4. readme
+5. 
