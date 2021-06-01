@@ -1,6 +1,4 @@
 """wrapper class for the tweepy module"""
-
-from re import M
 import tweepy
 from .RequestHelper import ResourceRequest
 from .autocorrect import tune
@@ -17,15 +15,18 @@ class Api:
         self.access_token = access_token
         self.access_token_secret = access_token_secret
 
+    #twitter api object for class
     @property
     def api(self):
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_token_secret)   
         return tweepy.API(auth)
 
+    #reply to tweet
     def reply(self,parameters,id):
         self.api.update_status(status = parameters,in_reply_to_status_id = id, auto_populate_reply_metadata=True)
 
+    #loop through mentions and perform actions
     def mentions_timeline(self):
         print("called function")
         for mentions in tweepy.Cursor(self.api.mentions_timeline,since_id =1392801506370277384).items():

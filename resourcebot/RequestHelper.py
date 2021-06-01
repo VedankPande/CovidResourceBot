@@ -36,11 +36,6 @@ class ResourceRequest:
         else:
             return self.help_message
 
-# @VEdankPAnde (pune)(oxygen,beds) -> [['pune'],['beds','bed']]
-
-
-
-
 if __name__ == "__main__":
     pass
 

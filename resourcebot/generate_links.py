@@ -12,15 +12,21 @@ class LinkGen:
         self.BASE = 'https://twitter.com/search/?q='
     
     def generate_link(self,parameters):
+
+        link = 'https://twitter.com/search/?q='
+
+        #Check the param is request or provide
         provide = False
         provide_group = ''
         if parameters[-1][0] == 'provide':
             provide = True
-        link = 'https://twitter.com/search/?q='
+        
         for idx,subparam in enumerate(parameters):
+            #cities
             if idx == 0:
                 for param in subparam:
                     link += f"{param} "
+            #search queries
             if idx == 1:
                 group = "("
                 for param in subparam:
@@ -37,15 +43,19 @@ class LinkGen:
                     group += " verified available"
                 else:
                     group += " " + provide_group + " "
-
                 link += f"{group}"
+
+            #negate queries
             if idx == 2 and subparam[0]!='provide': #make sure 3rd param isn't the provide flag (if negate params aren't given)
                 for param in subparam:
                     link += f" -\"{param}\""
+
+        #negate if request
         if not provide:
             for restrict in restrict_list:
                 link += f" -\"{restrict}\""
-
+        
+        #direct to 'latest' tab
         return link + "&f=live"
 
 
