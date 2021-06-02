@@ -1,13 +1,8 @@
-from test import generate_link
 from resourcebot.generate_links import LinkGen
-from resourcebot.RequestHelper import ResourceRequest
 from resourcebot.TweepyWrapper import Api
-from resourcebot.autocorrect import find_match,correct,tune
-from resourcebot.autocorrect import add_alternatives
+from resourcebot.autocorrect import tune
 
 import time
-import re
-# sample search param format: City (comma separated requirements) optional params: 'verified'  change later 
 
 consumer_key = "2Fa0aWQL6Jlyfx0vP2l6ROwIv"
 consumer_secret = "W0DCBRmLRL9m0r1RNIvr7vFUX1VikeFmhSvuqGxMJA5fsB3f2I"
@@ -15,37 +10,27 @@ access_token = "896024023531913217-9UYqVvatdCsoOzLDJZlY8i6oIECD3ER"
 access_token_secret = "fr1dHeiyOoQZC0BgGrVUnzPwBne7uUyO2dO7DILASLhpX"
 since_id =1392801506370277384
 
-# def check_params(text): #check for legitimate params
-
-#     try:
-#         text = re.sub(' ','',text)
-#         pattern = re.compile("@([a-zA-Z0-9]+)(\([a-zA-Z]+\))\(.+\)((\([a-zA-Z]+\))?)+")
-#         print("pattern check", re.match(pattern,text).group())
-#         return True
-    
-#     except Exception as e:  
-#         return False
-
-# def extract_params(text): #tokenize request
-
-#     if check_params(text):
-#         try:
-#             res = re.findall(r'\(.*?\)', text)
-#             res_list = [re.sub('[()]','',item).split(',') for item in res]
-#         except:
-#             return "could not extract parameters even though the request was formed properly, please inform the devs"
-#         return res_list
-#     else:
-#         return "fooked"
 
 
 if __name__ == "__main__":
     # request = "@ResourceBot (poone)  (oxygen,remdesivir,bed,food,ambulance) (extraargs)"
-    # params = [['poone','moombai'],['oxygen','remesdesvir','bed','food','ambulance']]
-    # res = extract_params(request)
-    # print(tune(res))
+    # params = [['poone','moombai'],['oxygen','remesdesvir','bed','food','ambulance'],['vedank']]
+    # print(tune(params))
+    # generator = LinkGen()
+    # print(generator.generate_link(tune(params)))
 
-    api = Api(consumer_key,consumer_secret,access_token,access_token_secret)
+    # request = '''Your request isn't formed properly, please try some of the below guidlines: \n
+    #                 1. A request has 4 parts (city)(resources)(negation words)(provide)\n
+    #                     the last two are optional\n
+    #                 2. Ensure that each part of your request is enclosed between parenthesis ()\n
+    #                 3. If you use the optional provide request, ensure that it is placed at\n
+    #                     the end of your request\n
+    #                 4. It is mandatory for separate words in the resources part to be \n
+    #                     separated by commas'''
+    # gen = LinkGen()
+    # print(gen.generate_link(tune(request)))
+
+    api = Api(consumer_key,consumer_secret,access_token,access_token_secret,since_id)
 
 
 

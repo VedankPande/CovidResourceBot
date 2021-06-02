@@ -1,11 +1,14 @@
 """ generate links from given request parameters """
-from typing import Tuple
-from urllib.parse import quote
+from .database.db_utils import DatabaseHandler
+import re
 
 #verified pune (bed OR beds OR icu OR oxygen OR ventilator OR ventilators) -"not verified" -"unverified" -"needed" -"need" -"needs" -"required" -"require" -"requires" -"requirement" -"requirements"
+#restrict_list = ['need','needs','needed','require','required','requires','requirement','requirements']
 
 BASE = 'https://twitter.come/search/?q=' #base string for urls
-restrict_list = ['need','needs','needed','require','required','requires','requirement','requirements']
+db = r"/home/vedank/Desktop/code/ResourceBot/database.db"
+handler = DatabaseHandler(db)
+restrict_list = handler.get_all('restrict')
 
 class LinkGen:
     def __init__(self):
@@ -52,7 +55,10 @@ class LinkGen:
             link += negation
         
         #direct to 'latest' tab
-        return link + "&f=live"
+        link += "&f=live"
+        link = re.sub(' ','+',link)
+        print(link)
+        return link
 
     def get_group(self,tokens):
         group = "("
@@ -64,6 +70,6 @@ class LinkGen:
     def get_negate(self,tokens):
         negate = ''
         for token in tokens:
-            negate += f" -\"{token}\""
+            negate += f" -{token}"
         return negate
 

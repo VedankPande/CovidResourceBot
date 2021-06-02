@@ -1,5 +1,4 @@
 """ helper to deal with all operations on the received request/tweet"""
-
 import re
 
 class ResourceRequest:
@@ -7,12 +6,11 @@ class ResourceRequest:
     def __init__(self,Tweet):
         self.id = Tweet.id
         self.tweet = Tweet.text.lower() #Tweet object from tweepy in lowercase
-        self.verified = True 
-        self.required = False
+
     
     @property
     def help_message(self): #reply with default message if request is not structured properly
-        return  "your request wasn't formed properly, try following some of the below guidelines"
+        return  '''Your request isn't formed properly, please read the pinned tweet thread on our timeline for help'''
     
     def check_params(self): #check for legitimate params
         try:
@@ -22,10 +20,10 @@ class ResourceRequest:
             return True
         
         except Exception as e:  
-            print(self.tweet)
             return False
     
     def extract_params(self): #tokenize request
+        print(self.check_params())
         if self.check_params():
             try:
                 res = re.findall(r'\(.*?\)', self.tweet)

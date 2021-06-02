@@ -1,9 +1,18 @@
 import Levenshtein
+from .database.db_utils import DatabaseHandler
+from .database.pickle_handler import load_data
 
 #TODO: convert lists to dictionaries and add alternative words for each word in it's values
-cities = ['pune','mumbai','banglore','kochi','delhi','kolkatta','madras','ahmedabad','jaipur','nagpur','thane'] #poona
-resources = ['oxygen','ventilator','bed','icu','test','fabiflu','remdesivir','favipiravir','tocilizumab','plasma','food','ambulance','amphotericin B']
-resource_dict = {'oxygen':[],'ventilator':['ventilators'],'bed':['beds'],'icu':[],'test':['tests','testing'],'fabiflu' :['fabiflu'],'remdesivir':['remdesivir'],'favipiravir':['favepiravir'],'tocilizumab':['tocilizumab'],'plasma':['plasma'],'food':['foods'],'ambulance':['amblances'],'amphotericin B' :['amphotericin B']}
+#cities = ['pune','mumbai','banglore','kochi','delhi','kolkatta','madras','ahmedabad','jaipur','nagpur','thane'] #poona
+#resources = ['oxygen','ventilator','bed','icu','test','fabiflu','remdesivir','favipiravir','tocilizumab','plasma','food','ambulance','amphotericin B']
+#resource_dict = {'oxygen':[],'ventilator':['ventilators'],'bed':['beds'],'icu':[],'test':['tests','testing'],'fabiflu' :['fabiflu'],'remdesivir':['remdesivir'],'favipiravir':['favepiravir'],'tocilizumab':['tocilizumab'],'plasma':['plasma'],'food':['foods'],'ambulance':['amblances'],'amphotericin B' :['amphotericin B']}
+
+db = r"/home/vedank/Desktop/code/ResourceBot/database.db"
+handler = DatabaseHandler(db)
+
+cities = handler.get_all('cities')
+resources = handler.get_all('resources')
+resource_dict = load_data()
 
 # corrects for spelling errors
 def correct(parameters):

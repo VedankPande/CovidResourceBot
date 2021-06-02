@@ -1,26 +1,6 @@
 """ test code here """ 
+import requests
 
 
-def generate_link(parameters):
-    link = 'https://twitter.com/search/?q='
-    for idx,subparam in enumerate(parameters):
-        if idx == 0:
-            for param in subparam:
-                link = link + f"{param} "
-        if idx == 1:
-            group = "("
-            for param in subparam:
-                group = group + f"{param} OR "
-            group = group + ")"
-            link = link + f"{group}"
-        if idx == 2:
-            for param in subparam:
-                link = link + f" -\"{param}\""
-    
-    return link + "&f=live"
-
-
-if __name__ == "__main__":
-    params = [['pune'],['oxygen','bed'],['not verified','needs','needed','required']]
-    print(generate_link(params))
-
+response = requests.post('https://api-ssl.bitly.com/v4/shorten',headers={"group_guid": "cdbf2bacdaf83d2a3fede50260c76eccaf7a6a5a",  "domain": "bit.ly",  "long_url": "https://dev.bitly.com" })
+print(response)
