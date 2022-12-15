@@ -1,21 +1,27 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/VedankPande/MajorProject">
-    <img src="workfit_app/assets/images/fitwave_logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/VedankPande/CovidResourceBot">
+    <img src="images/bot_logo.jpg" alt="Logo" width="150" height="150">
   </a>
 
-  <h3 align="center">FitWave</h3>
+  <h3 align="center">Covid Resource Bot</h3>
 </p>
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src = "ui_screens.png" alt = "screens">
-
 The idea behind this project is to develop a Twitter Bot to retrieve necessary information regarding Covid-19 resources quickly and easily. 
-Our Twitter bot aims to make searching for Covid resources easier, users can enter different parameters in their tweets while tagging the bot. 
+Our Twitter bot aims to make searching for Covid resources easier, users can enter different parameters in their tweets while tagging the bot.
+
+<p align = "center">
+<img src = "images/twt_bot_home.png" alt = "screens" width = "500" height = "700">
+
+<img src = "images/search_results.png" alt = "screens" width = "500" height = "700">
+Removed twitter handles to respect privacy of the users 
+
+</p>
 
 #### Additional features:
 
