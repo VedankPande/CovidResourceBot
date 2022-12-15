@@ -15,13 +15,12 @@
 The idea behind this project is to develop a Twitter Bot to retrieve necessary information regarding Covid-19 resources quickly and easily. 
 Our Twitter bot aims to make searching for Covid resources easier, users can enter different parameters in their tweets while tagging the bot.
 
-<p align = "center">
 <img src = "images/twt_bot_home.png" alt = "screens" width = "500" height = "700">
 
 <img src = "images/search_results.png" alt = "screens" width = "500" height = "700">
 Removed twitter handles to respect privacy of the users 
 
-</p>
+
 
 #### Additional features:
 
